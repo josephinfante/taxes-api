@@ -1,6 +1,5 @@
 import { randomBytes } from 'crypto'
 import { Bycript } from './bycript'
-import { Chance } from 'chance'
 
 export class Generate {
 	private static readonly TIMESTAMP_BYTES = 8
@@ -86,13 +85,5 @@ export class Generate {
 			code += chars.charAt(Math.floor(Math.random() * chars.length))
 		}
 		return code
-	}
-	static random_name(): string {
-		const chance = new Chance()
-		return chance.name()
-	}
-	static random_email(): string {
-		const chance = new Chance()
-		return chance.email({ domain: 'example.com' })
 	}
 }
