@@ -6,51 +6,26 @@ module.exports = {
 		try {
 			let tableExists
 			try {
-				tableExists = await queryInterface.describeTable('users')
+				tableExists = await queryInterface.describeTable('properties')
 			} catch (error) {
 				tableExists = false
 			}
 			if (!tableExists) {
 				await queryInterface.createTable(
-					'users',
+					'properties',
 					{
 						id: {
 							type: DataTypes.STRING(36),
 							allowNull: false,
 							primaryKey: true,
 						},
-						first_name: {
-							type: DataTypes.STRING(50),
-							allowNull: false,
-						},
-						last_name: {
-							type: DataTypes.STRING(50),
-							allowNull: false,
-						},
-						email: {
+						name: {
 							type: DataTypes.STRING(255),
 							allowNull: false,
-							unique: true,
 						},
-						password: {
+						address: {
 							type: DataTypes.STRING(255),
-							allowNull: true,
-							defaultValue: () => null,
-						},
-						authentication_type: {
-							type: DataTypes.STRING(20),
 							allowNull: false,
-							defaultValue: () => 'code',
-						},
-						role: {
-							type: DataTypes.STRING(20),
-							allowNull: true,
-							defaultValue: () => 'user',
-						},
-						last_login_at: {
-							type: DataTypes.BIGINT,
-							allowNull: true,
-							defaultValue: () => null,
 						},
 						hidden: {
 							type: DataTypes.BOOLEAN,
@@ -87,7 +62,7 @@ module.exports = {
 	down: async (queryInterface: QueryInterface): Promise<void> => {
 		const transaction = await queryInterface.sequelize.transaction()
 		try {
-			await queryInterface.dropTable('users', { transaction })
+			await queryInterface.dropTable('properties', { transaction })
 			await transaction.commit()
 		} catch (error) {
 			await transaction.rollback()
