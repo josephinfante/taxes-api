@@ -15,16 +15,16 @@ module.exports = {
 					'users',
 					{
 						id: {
-							type: DataTypes.STRING(44),
+							type: DataTypes.STRING(36),
 							allowNull: false,
 							primaryKey: true,
 						},
 						first_name: {
-							type: DataTypes.STRING(30),
+							type: DataTypes.STRING(50),
 							allowNull: false,
 						},
 						last_name: {
-							type: DataTypes.STRING(30),
+							type: DataTypes.STRING(50),
 							allowNull: false,
 						},
 						email: {
