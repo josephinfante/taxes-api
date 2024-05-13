@@ -23,22 +23,9 @@ export const MAIL_USER = process.env.MAIL_USER || ''
 export const MAIL_PASSWORD = process.env.MAIL_PASSWORD || ''
 
 // Status messages
-export const STATUS_MESSAGES = {
-	INITIATED: 'INITIATED',
-	COMPLETED: 'COMPLETED',
-	FAILED: 'FAILED',
-	SUCCESS: 'SUCCESS',
-	ERROR: 'ERROR',
-	TERMINATED: 'TERMINATED',
-}
-
-// Action messages
-export const ACTION_MESSAGES = {
-	CREATE: 'CREATE',
-	UPDATE: 'UPDATE',
-	DELETE: 'DELETE',
-	RESTORE: 'RESTORE',
-	EXPORT_REVIEWS: 'EXPORT_REVIEWS',
+export const TAXES_STATUS = {
+	PENDING: 'PENDIENTE',
+	PAID: 'PAGADO',
 }
 
 // Redis
