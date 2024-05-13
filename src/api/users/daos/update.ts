@@ -82,8 +82,7 @@ export async function updateUser(id: string, data: Users, access: Access): Promi
 			}
 		}
 
-		const date_now = Date.now()
-		user_exists.set('updated_at', date_now)
+		user_exists.set('updated_at', Date.now())
 		await user_exists.save()
 
 		return userPresenter(user_exists.dataValues)
