@@ -27,6 +27,10 @@ export const TAXES_STATUS = {
 	PENDING: 'PENDIENTE',
 	PAID: 'PAGADO',
 }
+export const PAYMENTS_STATUS = {
+	PENDING: 'PENDIENTE',
+	PAID: 'PAGADO',
+}
 
 // Redis
 export const REDIS_HOST = process.env.REDIS_HOST || ''

@@ -6,28 +6,36 @@ module.exports = {
 		try {
 			let tableExists
 			try {
-				tableExists = await queryInterface.describeTable('taxes')
+				tableExists = await queryInterface.describeTable('payments')
 			} catch (error) {
 				tableExists = false
 			}
 			if (!tableExists) {
 				await queryInterface.createTable(
-					'taxes',
+					'payments',
 					{
 						id: {
 							type: DataTypes.STRING(36),
 							allowNull: false,
 							primaryKey: true,
 						},
-						year: {
-							type: DataTypes.INTEGER,
+						reason: {
+							type: DataTypes.STRING(255),
 							allowNull: false,
 						},
-						total_paid_amount: {
+						amount: {
+							type: DataTypes.DECIMAL(10, 2),
+							allowNull: false,
+						},
+						delay_amount: {
 							type: DataTypes.DECIMAL(10, 2),
 							allowNull: true,
 						},
-						total_debt_amount: {
+						fee_amount: {
+							type: DataTypes.DECIMAL(10, 2),
+							allowNull: true,
+						},
+						total_paid_amount: {
 							type: DataTypes.DECIMAL(10, 2),
 							allowNull: false,
 						},
@@ -35,7 +43,21 @@ module.exports = {
 							type: DataTypes.STRING(100),
 							allowNull: false,
 						},
-						property_id: {
+						details: {
+							type: DataTypes.TEXT,
+							allowNull: true,
+							defaultValue: () => null,
+						},
+						files: {
+							type: DataTypes.TEXT,
+							allowNull: true,
+							defaultValue: () => null,
+						},
+						paid_at: {
+							type: DataTypes.BIGINT,
+							allowNull: false,
+						},
+						tax_id: {
 							type: DataTypes.STRING(36),
 							allowNull: false,
 						},
@@ -64,7 +86,7 @@ module.exports = {
 	down: async (queryInterface: QueryInterface): Promise<void> => {
 		const transaction = await queryInterface.sequelize.transaction()
 		try {
-			await queryInterface.dropTable('taxes', { transaction })
+			await queryInterface.dropTable('payments', { transaction })
 			await transaction.commit()
 		} catch (error) {
 			await transaction.rollback()

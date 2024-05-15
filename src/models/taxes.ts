@@ -15,43 +15,17 @@ TaxesModel.init(
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-		debt_amount_value: {
-			type: DataTypes.DECIMAL(10, 4),
-			allowNull: false,
+		total_paid_amount: {
+			type: DataTypes.DECIMAL(10, 2),
+			allowNull: true,
 		},
-		debt_amount_currency: {
-			type: DataTypes.STRING(3),
-			allowNull: false,
-		},
-		fee_amount_value: {
-			type: DataTypes.DECIMAL(10, 4),
-			allowNull: false,
-		},
-		fee_amount_currency: {
-			type: DataTypes.STRING(3),
-			allowNull: false,
-		},
-		total_amount_value: {
-			type: DataTypes.DECIMAL(10, 4),
-			allowNull: false,
-		},
-		total_amount_currency: {
-			type: DataTypes.STRING(3),
+		total_debt_amount: {
+			type: DataTypes.DECIMAL(10, 2),
 			allowNull: false,
 		},
 		status: {
 			type: DataTypes.STRING(100),
 			allowNull: false,
-		},
-		files: {
-			type: DataTypes.TEXT,
-			allowNull: true,
-			defaultValue: () => null,
-		},
-		paid_at: {
-			type: DataTypes.BIGINT,
-			allowNull: true,
-			defaultValue: () => null,
 		},
 		property_id: {
 			type: DataTypes.STRING(36),

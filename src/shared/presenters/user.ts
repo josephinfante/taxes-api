@@ -1,4 +1,4 @@
-import { Users } from '../classes/users.class'
+import { Users } from '../classes/users'
 
 interface UserPresenter {
 	id: string
