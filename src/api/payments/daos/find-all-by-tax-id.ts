@@ -1,5 +1,5 @@
 import { PaymentsModel } from '../../../models'
-import { CustomError, Payments } from '../../../shared'
+import { CustomError, Payments, paymentPresenter } from '../../../shared'
 
 export async function findAllPaymentsByTaxId(id: string): Promise<Payments[]> {
 	try {
@@ -10,7 +10,7 @@ export async function findAllPaymentsByTaxId(id: string): Promise<Payments[]> {
 			order: [['created_at', 'DESC']],
 		})
 
-		return payments?.map((payment) => payment.dataValues)
+		return payments?.map((payment) => paymentPresenter(payment.dataValues))
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()

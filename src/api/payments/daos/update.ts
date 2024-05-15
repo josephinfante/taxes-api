@@ -1,5 +1,5 @@
 import { PaymentsModel } from '../../../models'
-import { CustomError, Payments, Validators } from '../../../shared'
+import { CustomError, Payments, Validators, paymentPresenter } from '../../../shared'
 import { TaxesDao } from '../../taxes/tax.dao'
 
 export async function updatePayment(id: string, data: Partial<Payments>): Promise<Payments> {
@@ -83,7 +83,7 @@ export async function updatePayment(id: string, data: Partial<Payments>): Promis
 
 		if (amount_modified) await TaxesDao.updateTotalPaid(payment_exists.dataValues.tax_id)
 
-		return payment_exists.dataValues
+		return paymentPresenter(payment_exists.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()
