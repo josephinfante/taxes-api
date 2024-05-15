@@ -1,5 +1,5 @@
 import { TaxesModel } from '../../../models'
-import { CustomError, Taxes } from '../../../shared'
+import { CustomError, Taxes, taxPresenter } from '../../../shared'
 import { PropertiesDao } from '../../properties/property.dao'
 
 export async function updateTax(id: string, data: Partial<Taxes>): Promise<Taxes> {
@@ -36,7 +36,7 @@ export async function updateTax(id: string, data: Partial<Taxes>): Promise<Taxes
 		tax_exists.set('updated_at', Date.now())
 		await tax_exists.save()
 
-		return tax_exists.dataValues
+		return taxPresenter(tax_exists.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()

@@ -1,6 +1,6 @@
 import { TAXES_STATUS } from '../../../config'
 import { TaxesModel } from '../../../models'
-import { CustomError, Generate, Taxes, Validators } from '../../../shared'
+import { CustomError, Generate, Taxes, Validators, taxPresenter } from '../../../shared'
 import { PropertiesDao } from '../../properties/property.dao'
 
 export async function createTax(data: Partial<Taxes>): Promise<Taxes> {
@@ -27,7 +27,7 @@ export async function createTax(data: Partial<Taxes>): Promise<Taxes> {
 			created_at: Date.now(),
 		})
 
-		return taxes.dataValues
+		return taxPresenter(taxes.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()

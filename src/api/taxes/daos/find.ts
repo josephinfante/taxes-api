@@ -1,5 +1,5 @@
 import { TaxesModel } from '../../../models'
-import { CustomError, Taxes } from '../../../shared'
+import { CustomError, Taxes, taxPresenter } from '../../../shared'
 
 export async function findTax(id: string): Promise<Taxes> {
 	try {
@@ -8,7 +8,7 @@ export async function findTax(id: string): Promise<Taxes> {
 		const tax_exists = await TaxesModel.findByPk(id)
 		if (!tax_exists) throw CustomError.badRequest(`El impuesto con ID '${id}' no existe.`)
 
-		return tax_exists.dataValues
+		return taxPresenter(tax_exists.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()
