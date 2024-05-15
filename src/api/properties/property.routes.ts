@@ -10,8 +10,8 @@ export class PropertiesRouter {
 		router.post('/', canAccess, isSuperAdmin, controller.create.bind(controller))
 		router.patch('/:id', canAccess, isSuperAdmin, controller.update.bind(controller))
 		router.delete('/:id', canAccess, isSuperAdmin, controller.delete.bind(controller))
-		router.get('/:id', canAccess, isSuperAdmin, controller.find.bind(controller))
-		router.get('/', canAccess, isSuperAdmin, controller.findAll.bind(controller))
+		router.get('/:id', canAccess, controller.find.bind(controller))
+		router.get('/', canAccess, controller.findAll.bind(controller))
 
 		return router
 	}
