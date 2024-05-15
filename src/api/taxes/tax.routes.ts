@@ -9,6 +9,7 @@ export class TaxesRouter {
 
 		router.post('/', canAccess, isSuperAdmin, controller.create.bind(controller))
 		router.patch('/:id', canAccess, isSuperAdmin, controller.update.bind(controller))
+		router.get('/:id', canAccess, controller.find.bind(controller))
 
 		return router
 	}

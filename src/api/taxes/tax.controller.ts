@@ -19,4 +19,9 @@ export class TaxesController {
 			.then((tax) => res.status(200).json(tax))
 			.catch((error) => this.handleError(error, res))
 	}
+	find = async (req: Request, res: Response) => {
+		return TaxesDao.find(req.params.id)
+			.then((tax) => res.status(200).json(tax))
+			.catch((error) => this.handleError(error, res))
+	}
 }
