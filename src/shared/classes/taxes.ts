@@ -11,7 +11,8 @@ export class Taxes {
 	constructor(data: Taxes) {
 		this.id = data.id
 		this.year = data.year
-		;(this.total_paid_amount = data.total_paid_amount), (this.total_debt_amount = data.total_debt_amount)
+		this.total_paid_amount = data.total_paid_amount
+		this.total_debt_amount = data.total_debt_amount
 		this.status = data.status
 		this.property_id = data.property_id
 		this.updated_at = data.updated_at
