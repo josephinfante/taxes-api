@@ -1,5 +1,5 @@
 import { PropertiesModel } from '../../../models'
-import { CustomError, Properties } from '../../../shared'
+import { CustomError, Properties, propertyPresenter } from '../../../shared'
 
 export async function updateProperty(id: string, data: Partial<Properties>): Promise<Properties> {
 	try {
@@ -31,7 +31,7 @@ export async function updateProperty(id: string, data: Partial<Properties>): Pro
 		property_exists.set('updated_at', Date.now())
 		await property_exists.save()
 
-		return property_exists.dataValues
+		return propertyPresenter(property_exists.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()

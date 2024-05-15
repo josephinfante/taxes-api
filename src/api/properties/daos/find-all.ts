@@ -1,5 +1,5 @@
 import { ParsedQs } from 'qs'
-import { CustomError, FindAll } from '../../../shared'
+import { CustomError, FindAll, propertyPresenter } from '../../../shared'
 import { PropertiesModel } from '../../../models'
 import { Op } from 'sequelize'
 
@@ -30,7 +30,7 @@ export async function findAllProperties(query: ParsedQs): Promise<FindAll> {
 		})
 
 		return {
-			data: rows?.map((property) => property.dataValues),
+			data: rows?.map((property) => propertyPresenter(property.dataValues)),
 			total_count: count,
 			total_pages: Math.ceil(count / limit),
 			current_page: query?.page ? Number(query.page) : 1,

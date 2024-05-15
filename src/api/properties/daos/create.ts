@@ -1,5 +1,5 @@
 import { PropertiesModel } from '../../../models'
-import { CustomError, Generate, Properties } from '../../../shared'
+import { CustomError, Generate, Properties, propertyPresenter } from '../../../shared'
 
 export async function createProperty(data: Partial<Properties>): Promise<Properties> {
 	try {
@@ -21,7 +21,7 @@ export async function createProperty(data: Partial<Properties>): Promise<Propert
 
 		if (!created) throw CustomError.badRequest('Registro fallido. No se pudo registrar la propiedad.')
 
-		return property.dataValues
+		return propertyPresenter(property.dataValues)
 	} catch (error) {
 		if (error instanceof CustomError) throw error
 		throw CustomError.internal()
