@@ -14,24 +14,20 @@ export async function updateTaxTotalPaid(id: string): Promise<void> {
 		let total_paid_amount = 0
 		if (tax_exists.dataValues.payments) {
 			total_paid_amount = tax_exists.dataValues.payments.reduce((acc: number, payment: any) => {
-				return acc + payment.total_paid_amount
+				return acc + Number(payment.dataValues.total_paid_amount)
 			}, 0)
 		}
 
-		if (tax_exists.dataValues.total_paid_amount == Number(total_paid_amount)) {
-			tax_exists.set({
-				status: TAXES_STATUS.PAID,
-				updated_at: Date.now(),
-			})
+		if (tax_exists.dataValues.total_debt_amount >= Number(total_paid_amount)) {
+			tax_exists.set('status', TAXES_STATUS.PAID)
 		} else {
-			tax_exists.set({
-				status: TAXES_STATUS.PENDING,
-				total_paid_amount: total_paid_amount,
-				updated_at: Date.now(),
-			})
+			tax_exists.set('status', TAXES_STATUS.PENDING)
 		}
+		tax_exists.set({
+			total_paid_amount: total_paid_amount,
+			updated_at: Date.now(),
+		})
 
-		console.log(total_paid_amount)
 		await tax_exists.save()
 	} catch (error) {
 		if (error instanceof CustomError) throw error
